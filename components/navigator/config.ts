@@ -13,8 +13,8 @@ export const navMenuConfig = [
     name: "人片",
   },
   {
-    path: "cat",
-    name: "猫片",
+    path: "document",
+    name: "文档",
   },
   {
     path: "management",

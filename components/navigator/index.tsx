@@ -36,7 +36,7 @@ const LogoCell = () => (
 
 export const NavBar = () => {
   return (
-    <div className="w-full h-14 px-10 py-2 shadow-md flex justify-between fixed">
+    <div className="w-full h-14 px-10 py-2 shadow-md flex justify-between fixed top-0 bg-white">
       <LogoCell />
       <NavigationInnerMenu />
     </div>

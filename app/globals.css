@@ -65,5 +65,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei",
+      "微软雅黑", sans-serif;
   }
 }
