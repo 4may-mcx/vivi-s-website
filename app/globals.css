@@ -81,6 +81,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    overscroll-behavior: none; /* 禁止过度滚动 */
     font-family:
       system-ui,
       -apple-system,
