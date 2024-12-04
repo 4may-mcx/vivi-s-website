@@ -1,0 +1,26 @@
+{
+  "plugins": [
+    "prettier-plugin-organize-attributes",
+    "prettier-plugin-tailwindcss"
+  ],
+  "printWidth": 80,
+  "singleQuote": true,
+  "semi": true,
+  "attributeGroups": [
+    "^key$",
+    "^ref$",
+    "^className$",
+    "^(id|name)$",
+    "^data-",
+    "^aria-",
+    "^on[A-Z]",
+    "^[a-z]"
+  ],
+  "attributeSort": "ASC",
+  "organizeAttributes": {
+    "className": {
+      "breakLength": 40,
+      "breakStyle": "multiline"
+    }
+  }
+}

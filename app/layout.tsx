@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import type { Metadata } from 'next';
+import './globals.css';
 
 export const metadata: Metadata = {
-  title: "Vivi",
+  title: 'Vivi',
   description: "vivi's website",
 };
 
@@ -14,7 +14,7 @@ export default function RootLayout({
   return (
     <html lang="zh">
       <body>
-        <main className="w-full h-full">{children}</main>
+        <main className="h-full w-full">{children}</main>
       </body>
     </html>
   );

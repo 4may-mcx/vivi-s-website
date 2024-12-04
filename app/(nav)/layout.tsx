@@ -1,4 +1,4 @@
-import { NavBar } from "@/components/navigator";
+import { NavBar } from '@/components/navigator';
 
 export default function RootLayout({
   children,
@@ -8,7 +8,7 @@ export default function RootLayout({
   return (
     <>
       <NavBar />
-      <main className="z-0 pt-14 w-full h-full">{children}</main>
+      <main className="z-0 h-full w-full pt-14">{children}</main>
     </>
   );
 }
