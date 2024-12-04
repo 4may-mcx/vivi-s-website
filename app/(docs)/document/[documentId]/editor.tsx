@@ -6,6 +6,7 @@ import Heading from '@tiptap/extension-heading';
 import Image from '@tiptap/extension-image';
 import TaskItem from '@tiptap/extension-task-item';
 import TaskList from '@tiptap/extension-task-list';
+import Underline from '@tiptap/extension-underline';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import ImageResize from 'tiptap-extension-resize-image';
@@ -41,6 +42,7 @@ export const Editor = () => {
       Image,
       ImageResize,
       Dropcursor,
+      Underline,
       TaskList,
       TaskItem.configure({
         nested: true,
