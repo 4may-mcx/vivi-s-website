@@ -1,11 +1,15 @@
 'use client';
 
 import { useEditorStore } from '@/src/store/use-editor-store';
+import Color from '@tiptap/extension-color';
 import Dropcursor from '@tiptap/extension-dropcursor';
+import FontFamily from '@tiptap/extension-font-family';
 import Heading from '@tiptap/extension-heading';
+import Highlight from '@tiptap/extension-highlight';
 import Image from '@tiptap/extension-image';
 import TaskItem from '@tiptap/extension-task-item';
 import TaskList from '@tiptap/extension-task-list';
+import TextStyle from '@tiptap/extension-text-style';
 import Underline from '@tiptap/extension-underline';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
@@ -37,16 +41,18 @@ export const Editor = () => {
       setEditor(null);
     },
     extensions: [
+      Highlight.configure({ multicolor: true }),
+      TaskItem.configure({ nested: true }),
       StarterKit,
+      FontFamily,
+      TextStyle,
+      Color,
       Heading,
       Image,
       ImageResize,
       Dropcursor,
       Underline,
       TaskList,
-      TaskItem.configure({
-        nested: true,
-      }),
     ],
     content: '<p>Hello World!</p>',
     editorProps: {
