@@ -138,7 +138,7 @@ export const Toolbar = () => {
   ];
 
   return (
-    <div className="flex min-h-[40px] items-center justify-center gap-x-0.5 overflow-x-auto rounded-[24px] bg-[#F1F4F9] py-0.5">
+    <div className="flex min-h-[40px] items-center gap-x-0.5 overflow-x-auto rounded-[24px] bg-[#F1F4F9] px-2.5 py-0.5">
       {sections[0].map((item) => (
         <ToolbarButton key={item.label} {...item} />
       ))}
