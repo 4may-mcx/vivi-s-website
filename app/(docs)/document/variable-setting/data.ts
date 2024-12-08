@@ -20,6 +20,12 @@ export interface TaskInputParamType {
   [key: string]: any;
 }
 
+export interface TaskParamProps {
+  param: TaskInputParamType;
+  value: string;
+  updateNodeParamValue: (newValue: string) => void;
+}
+
 export interface RegistryItemType {
   type: TaskType;
   label: string;
