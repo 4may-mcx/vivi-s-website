@@ -32,14 +32,14 @@ const routeConfig = [
 const LogoCell = () => {
   return (
     <Link
-      href="/"
+      href="/management"
       className={cn('flex items-center gap-2 text-2xl font-extrabold')}
     >
-      <div className="rounded-xl bg-gradient-to-r from-emerald-500 to-black p-2">
+      <div className="rounded-xl bg-gradient-to-r from-gray-500 to-black p-2">
         <SquareDashedMousePointer size={14} className="stroke-white" />
       </div>
       <div>
-        <span className="bg-gradient-to-r from-emerald-500 to-stone-700 bg-clip-text text-lg text-transparent">
+        <span className="bg-gradient-to-r from-gray-500 to-stone-700 bg-clip-text text-lg text-transparent">
           资源管理
         </span>
       </div>
@@ -55,7 +55,7 @@ export const ManagementSideBar = () => {
     ) ?? routeConfig[0];
 
   return (
-    <div className="relative hidden w-[280px] overflow-hidden border-r-[1px] text-muted-foreground md:block">
+    <div className="relative hidden w-[220px] overflow-hidden border-r-[1px] text-muted-foreground md:block">
       <div className="flex items-center justify-center gap-2 p-3">
         <LogoCell />
       </div>
@@ -68,9 +68,9 @@ export const ManagementSideBar = () => {
               variant: 'ghost',
               size: 'sm',
               className: cn(
-                '!justify-start gap-2 hover:bg-green-800 hover:text-primary-foreground',
+                '!justify-start gap-2 hover:bg-gray-600 hover:text-primary-foreground',
                 activeRoute.href === route.href &&
-                  'bg-green-800 text-primary-foreground',
+                  'bg-gray-600 text-primary-foreground',
               ),
             })}
           >

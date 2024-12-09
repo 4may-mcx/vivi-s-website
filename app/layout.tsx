@@ -1,6 +1,7 @@
 import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
 import './globals.css';
+import { AppProvider } from '@/provider/app-provider';
 
 export const metadata: Metadata = {
   title: 'Vivi',
@@ -16,7 +17,9 @@ export default function RootLayout({
     <ClerkProvider afterSignOutUrl={'/sign-in'}>
       <html lang="zh">
         <body>
-          <main className="flex h-screen w-screen flex-col">{children}</main>
+          <AppProvider>
+            <main className="flex h-screen w-screen flex-col">{children}</main>
+          </AppProvider>
         </body>
       </html>
     </ClerkProvider>
