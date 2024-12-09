@@ -1,3 +1,4 @@
+import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
 import './globals.css';
 
@@ -12,10 +13,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh">
-      <body>
-        <main className="h-full w-full">{children}</main>
-      </body>
-    </html>
+    <ClerkProvider afterSignOutUrl={'/sign-in'}>
+      <html lang="zh">
+        <body>
+          <main className="flex h-screen w-screen flex-col">{children}</main>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

@@ -8,7 +8,25 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
 import { navMenuConfig } from './config';
+import { Button } from '@/components/ui/button';
+import { LogIn } from 'lucide-react';
+
+const ClerkSignInStatus = () => (
+  <>
+    <SignedIn>
+      <UserButton />
+    </SignedIn>
+    <SignedOut>
+      <SignInButton>
+        <Button variant="ghost">
+          <LogIn size={16} />
+        </Button>
+      </SignInButton>
+    </SignedOut>
+  </>
+);
 
 const NavigationInnerMenu = () => {
   return (
@@ -23,6 +41,7 @@ const NavigationInnerMenu = () => {
             </Link>
           </NavigationMenuItem>
         ))}
+        <ClerkSignInStatus />
       </NavigationMenuList>
     </NavigationMenu>
   );
@@ -36,9 +55,9 @@ const LogoCell = () => (
 
 export const NavBar = () => {
   return (
-    <div className="fixed top-0 flex h-14 w-full justify-between bg-white px-10 py-2 shadow-md">
+    <header className="fixed top-0 flex h-14 w-full justify-between bg-white px-10 py-2 shadow-md">
       <LogoCell />
       <NavigationInnerMenu />
-    </div>
+    </header>
   );
 };
