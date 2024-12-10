@@ -2,6 +2,7 @@ import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
 import './globals.css';
 import { AppProvider } from '@/provider/app-provider';
+import { Toaster } from '@/components/ui/sonner';
 
 export const metadata: Metadata = {
   title: 'Vivi',
@@ -20,6 +21,7 @@ export default function RootLayout({
           <AppProvider>
             <main className="flex h-screen w-screen flex-col">{children}</main>
           </AppProvider>
+          <Toaster richColors />
         </body>
       </html>
     </ClerkProvider>

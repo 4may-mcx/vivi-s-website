@@ -1,4 +1,4 @@
-import { ManagementSideBar } from './_component/side-bar';
+import { ManagementSideBar } from './_components/side-bar';
 
 export default function Layout({
   children,

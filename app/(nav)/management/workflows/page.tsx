@@ -4,11 +4,12 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { AlertCircle, InboxIcon } from 'lucide-react';
 import { Suspense } from 'react';
 import { CreateWorkflowDialog } from './_components/create-workflow-dialog';
+import { WorkflowCard } from './_components/workflow-card';
 
 const UserWorkflowsSkeleton = () => {
   return (
     <div className="space-y-2">
-      {[1, 2, 3, 4].map((i) => (
+      {new Array(4).fill(0).map((_, i) => (
         <Skeleton key={i} className="h-32 w-full" />
       ))}
     </div>
@@ -35,7 +36,13 @@ const UserWorkflows = async () => {
         </div>
       );
     }
-    return <div>{JSON.stringify(workflows, null, 4)}</div>;
+    return (
+      <div className="grid grid-cols-1 gap-4">
+        {workflows.map((workflow) => (
+          <WorkflowCard key={workflow.id} workflow={workflow} />
+        ))}
+      </div>
+    );
   } catch {
     return (
       <Alert variant={'destructive'}>

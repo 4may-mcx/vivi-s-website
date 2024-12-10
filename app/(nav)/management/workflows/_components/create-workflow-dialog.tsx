@@ -7,7 +7,6 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -21,14 +20,17 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { Layers2Icon, Loader2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 export const CreateWorkflowDialog = ({
   triggerText,
 }: {
   triggerText?: string;
 }) => {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
 
   const form = useForm<CreateWorkflowSchemaType>({
@@ -39,19 +41,31 @@ export const CreateWorkflowDialog = ({
   const { mutate, isPending } = useMutation({
     mutationFn: CreateWorkflow,
     onSuccess: () => {
+      toast.success('创建成功', { id: 'create-workflow' });
       setOpen(false);
+      router.refresh();
+    },
+    onError: () => {
+      toast.error('创建失败', { id: 'create-workflow' });
     },
   });
 
   const handleSubmit = useCallback(
     (values: CreateWorkflowSchemaType) => {
+      toast.loading('创建中...', { id: 'create-workflow' });
       mutate(values);
     },
     [mutate],
   );
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog
+      open={open}
+      onOpenChange={(isOpen) => {
+        form.reset();
+        setOpen(isOpen);
+      }}
+    >
       <DialogTrigger asChild>
         <Button>{triggerText ?? '新建 Workflow'}</Button>
       </DialogTrigger>
