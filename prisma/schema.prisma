@@ -30,7 +30,7 @@ model Workflow {
   name        String
   description String?
 
-  definition String
+  definition String @db.LongText
   status     String
 
   createdTime DateTime @default(now())

@@ -1,5 +1,4 @@
-import { TooltipWrapper } from '@/components/tooltip-wrapper';
-import { Button, buttonVariants } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
   DropdownMenu,
@@ -17,7 +16,6 @@ import {
   MoreVerticalIcon,
   PlayIcon,
   ShuffleIcon,
-  TrashIcon,
 } from 'lucide-react';
 import Link from 'next/link';
 import { DeleteWorkflowBtn } from './delete-workflow-btn';

@@ -18,3 +18,13 @@ export const GetWorkflowsForUser = async () => {
     },
   });
 };
+
+export const GetWorkFlowById = async (workflowId: string) => {
+  const { userId } = await auth();
+  if (!userId) {
+    throw new Error('unAuthenticated');
+  }
+  return prisma.workflow.findUnique({
+    where: { id: workflowId, userId },
+  });
+};

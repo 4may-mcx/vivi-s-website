@@ -1,16 +1,18 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { CheckIcon, ChevronLeftIcon } from 'lucide-react';
+import { ChevronLeftIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { SaveBtn } from './save-btn';
 
 export const TopBar = ({
   title,
   subTitle,
+  workflowId,
 }: {
   title: string;
   subTitle?: string;
+  workflowId: string;
 }) => {
   const router = useRouter();
 
@@ -29,7 +31,7 @@ export const TopBar = ({
           )}
         </div>
       </div>
-      <SaveBtn />
+      <SaveBtn workflowId={workflowId} />
     </header>
   );
 };

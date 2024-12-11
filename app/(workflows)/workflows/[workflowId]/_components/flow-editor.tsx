@@ -1,20 +1,20 @@
 'use client';
 
-import { useCallback } from 'react';
 import {
-  ReactFlow,
-  Controls,
-  MiniMap,
-  useNodesState,
-  useEdgesState,
   addEdge,
-  Connection,
-  Node,
-  Edge,
   Background,
   BackgroundVariant,
+  Connection,
+  Controls,
+  Edge,
+  MiniMap,
+  ReactFlow,
+  useEdgesState,
+  useNodesState,
 } from '@xyflow/react';
+import { useCallback } from 'react';
 
+import { Workflow } from '@prisma/client';
 import '@xyflow/react/dist/style.css';
 import { createFlowNode } from '../_lib/createFlowNode';
 import { TaskType } from '../data';
@@ -29,7 +29,9 @@ const nodeTypes = {
 const snapGrid: [number, number] = [12, 12];
 const fitViewOptions = { padding: 2 };
 
-export const FlowEditor = () => {
+export const FlowEditor = ({ workflow }: { workflow: Workflow | null }) => {
+  console.log(workflow, '======');
+
   const [nodes, setNodes, onNodesChange] = useNodesState([
     createFlowNode(TaskType.VARIABLE_GROUP),
   ]);
