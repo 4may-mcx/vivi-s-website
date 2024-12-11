@@ -13,7 +13,7 @@ export const NodeComponent = memo(({ id, selected, data }: NodeProps) => {
 
   return (
     <NodeCard nodeId={id} isSelected={selected}>
-      <NodeHeader taskType={nodeData.type} />
+      <NodeHeader taskType={nodeData.type} nodeId={id} />
       <NodeInputs>
         {task?.inputs &&
           task.inputs.map((input) => (

@@ -42,7 +42,7 @@ export interface RegistryItemType {
   icon: (props: LucideProps) => ReactNode;
   isEntryPoint?: boolean;
   inputs?: TaskInputParamType[];
-  outputs?: TaskInputParamType[];
+  outputs?: TaskOutputParamType[];
 }
 
 export interface AppNodeData {
