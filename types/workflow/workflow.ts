@@ -17,10 +17,12 @@ export interface WorkflowTask {
   outputs?: TaskOutputParamType[];
 }
 
-export type WorkflowExecutionPlan = {
+export interface WorkflowExecutionPlanPhase {
   phase: number;
-  nodes: AppNode;
-};
+  nodes: AppNode[];
+}
+
+export type WorkflowExecutionPlan = WorkflowExecutionPlanPhase[];
 
 export interface FlowVariableItemType {
   label: string;
