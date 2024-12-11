@@ -1,9 +1,9 @@
 import { GlobeIcon, LucideProps } from 'lucide-react';
 import { RegistryItemType, TaskParamType, TaskType } from '../../data';
 
-export const VariableGroupTask: RegistryItemType = {
-  type: TaskType.VARIABLE_GROUP,
-  label: '变量组',
+export const LaunchBrowserTask: RegistryItemType = {
+  type: TaskType.LAUNCH_BROWSER,
+  label: 'Launch browser',
   icon: (props: LucideProps) => (
     <GlobeIcon className="stroke-green-800" {...props} />
   ),
@@ -15,6 +15,12 @@ export const VariableGroupTask: RegistryItemType = {
       helperText: 'eg: https://www.google.com',
       required: true,
       hideHandle: true,
+    },
+  ],
+  outputs: [
+    {
+      name: 'Web page',
+      type: TaskParamType.BROWSER_INSTANCE,
     },
   ],
 };

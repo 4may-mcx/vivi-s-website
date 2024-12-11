@@ -1,7 +1,8 @@
+import { GetWorkFlowById } from '@/actions/workflows/getWorkflowsForUser';
 import { ReactFlowProvider } from '@xyflow/react';
 import { FlowEditor } from './_components/flow-editor';
+import { TaskMenu } from './_components/task-menu';
 import { TopBar } from './_components/top-bar';
-import { GetWorkFlowById } from '@/actions/workflows/getWorkflowsForUser';
 
 export default async function WorkflowEditorPage({
   params,
@@ -18,7 +19,10 @@ export default async function WorkflowEditorPage({
           subTitle="逐字稿编辑"
           workflowId={params.workflowId}
         />
-        <FlowEditor workflow={workflow} />
+        <div className="flex h-full w-full">
+          <TaskMenu />
+          <FlowEditor workflow={workflow} />
+        </div>
       </ReactFlowProvider>
     </div>
   );

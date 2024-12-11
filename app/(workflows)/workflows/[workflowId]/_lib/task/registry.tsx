@@ -1,6 +1,8 @@
 import { RegistryItemType, TaskType } from '../../data';
-import { VariableGroupTask } from './variable-group';
+import { LaunchBrowserTask } from './launch_browser';
+import { PageToHtmlTask } from './page-to-html';
 
 export const TaskRegistry: Record<TaskType, RegistryItemType> = {
-  VARIABLE_GROUP: VariableGroupTask,
+  LAUNCH_BROWSER: LaunchBrowserTask,
+  PAGE_TO_HTML: PageToHtmlTask,
 };

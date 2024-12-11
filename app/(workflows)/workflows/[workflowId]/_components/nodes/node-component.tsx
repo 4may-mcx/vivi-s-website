@@ -5,6 +5,7 @@ import { NodeCard } from './node-card';
 import { NodeHeader } from './node-header';
 import { TaskRegistry } from '../../_lib/task/registry';
 import { NodeInput, NodeInputs } from './node-inputs';
+import { NodeOutput, NodeOutputs } from './node-outputs';
 
 export const NodeComponent = memo(({ id, selected, data }: NodeProps) => {
   const nodeData = data as AppNodeData;
@@ -19,6 +20,12 @@ export const NodeComponent = memo(({ id, selected, data }: NodeProps) => {
             <NodeInput key={input.name} input={input} nodeId={id} />
           ))}
       </NodeInputs>
+      <NodeOutputs>
+        {task?.outputs &&
+          task.outputs.map((output) => (
+            <NodeOutput key={output.name} output={output} />
+          ))}
+      </NodeOutputs>
     </NodeCard>
   );
 });

@@ -17,7 +17,7 @@ export const TopBar = ({
   const router = useRouter();
 
   return (
-    <header className="sticky top-0 z-10 flex h-[60px] w-full border-separate justify-between border-pink-200 bg-background p-2">
+    <header className="sticky top-0 z-10 flex h-[60px] w-full border-separate justify-between border-b-2 bg-background p-2">
       <div className="flex flex-1 gap-1">
         <Button variant="ghost" size="icon" onClick={() => router.back()}>
           <ChevronLeftIcon size={32} />

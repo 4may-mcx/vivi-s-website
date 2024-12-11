@@ -3,27 +3,35 @@ import { LucideProps } from 'lucide-react';
 import { ReactNode } from 'react';
 
 export enum TaskType {
-  VARIABLE_GROUP = 'VARIABLE_GROUP',
+  // VARIABLE_GROUP = 'VARIABLE_GROUP',
+  LAUNCH_BROWSER = 'LAUNCH_BROWSER',
+  PAGE_TO_HTML = 'PAGE_TO_HTML',
 }
 
 export enum TaskParamType {
   STRING = 'STRING',
+  BROWSER_INSTANCE = 'BROWSER_INSTANCE',
 }
 
-export interface TaskInputParamType {
+export interface TaskParamBasicType {
   name: string;
   type: TaskParamType;
   helperText?: string;
-  required?: boolean;
   hideHandle?: boolean;
   value?: string;
   [key: string]: any;
 }
 
+export type TaskInputParamType = TaskParamBasicType & {
+  required?: boolean;
+};
+
+export type TaskOutputParamType = TaskParamBasicType;
+
 export interface TaskParamProps {
   param: TaskInputParamType;
-  value: string;
-  updateNodeParamValue: (newValue: string) => void;
+  value?: string;
+  updateNodeParamValue?: (newValue: string) => void;
 }
 
 export interface RegistryItemType {
@@ -32,6 +40,7 @@ export interface RegistryItemType {
   icon: (props: LucideProps) => ReactNode;
   isEntryPoint?: boolean;
   inputs?: TaskInputParamType[];
+  outputs?: TaskInputParamType[];
 }
 
 export interface AppNodeData {

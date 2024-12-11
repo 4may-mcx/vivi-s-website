@@ -1,5 +1,6 @@
 'use client';
 
+import { Workflow } from '@prisma/client';
 import {
   addEdge,
   Background,
@@ -11,16 +12,13 @@ import {
   ReactFlow,
   useEdgesState,
   useNodesState,
+  useReactFlow,
 } from '@xyflow/react';
-import { useCallback } from 'react';
-
-import { Workflow } from '@prisma/client';
 import '@xyflow/react/dist/style.css';
-import { createFlowNode } from '../_lib/createFlowNode';
-import { TaskType } from '../data';
+import { useCallback, useEffect } from 'react';
 import { NodeComponent } from './nodes/node-component';
-
-const initialEdges: Edge[] = [{ id: 'e1-2', source: '1', target: '2' }];
+import { createFlowNode } from '../_lib/createFlowNode';
+import { AppNode, TaskType } from '../data';
 
 const nodeTypes = {
   FlowScrapeNode: NodeComponent,
@@ -30,18 +28,50 @@ const snapGrid: [number, number] = [12, 12];
 const fitViewOptions = { padding: 2 };
 
 export const FlowEditor = ({ workflow }: { workflow: Workflow | null }) => {
-  console.log(workflow, '======');
+  const [nodes, setNodes, onNodesChange] = useNodesState<AppNode>([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
+  const { setViewport, screenToFlowPosition } = useReactFlow();
 
-  const [nodes, setNodes, onNodesChange] = useNodesState([
-    createFlowNode(TaskType.VARIABLE_GROUP),
-  ]);
+  useEffect(() => {
+    try {
+      if (!workflow) return;
+      const flow = JSON.parse(workflow.definition);
+      console.log('@INIT_FLOW ', flow);
 
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+      if (!flow) return;
+      setNodes(flow.nodes ?? []);
+      setEdges(flow.edges ?? []);
+
+      if (!flow.viewport) return;
+      setViewport({ x: flow.viewport.x, y: flow.viewport.y, zoom: 1 });
+    } catch (error) {}
+  }, [workflow]);
 
   const onConnect = useCallback(
-    (params: Connection) => setEdges((eds) => addEdge(params, eds)),
+    (connection: Connection) =>
+      setEdges((eds) => addEdge({ ...connection, animated: true }, eds)),
     [setEdges],
   );
+
+  const onDragOver = useCallback((event: React.DragEvent) => {
+    event.preventDefault();
+    // 如果和 DragStart 的 effectAllowed 不匹配，不会执行后续的 onDrop
+    event.dataTransfer.dropEffect = 'move';
+  }, []);
+
+  const onDrop = useCallback((event: React.DragEvent) => {
+    event.preventDefault();
+    const taskType = event.dataTransfer.getData('application/reactflow');
+    if (!taskType) return;
+
+    const position = screenToFlowPosition({
+      x: event.clientX,
+      y: event.clientY,
+    });
+
+    const newNode = createFlowNode(taskType as TaskType, position);
+    setNodes((nds) => nds.concat(newNode));
+  }, []);
 
   return (
     <main style={{ width: '100vw', height: '100vh' }}>
@@ -51,6 +81,8 @@ export const FlowEditor = ({ workflow }: { workflow: Workflow | null }) => {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        onDragOver={onDragOver}
+        onDrop={onDrop}
         nodeTypes={nodeTypes}
         snapToGrid
         snapGrid={snapGrid}

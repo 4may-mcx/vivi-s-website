@@ -1,8 +1,7 @@
 import { AppNode, TaskType } from '../data';
 
-let ID_COUNT = 0;
 const generateNodeId = (nodeType: TaskType) =>
-  `$$__${nodeType}_${ID_COUNT++}__$$`;
+  `$$__${nodeType}_${crypto.randomUUID()}__$$`;
 
 export const createFlowNode = (
   nodeType: TaskType,
