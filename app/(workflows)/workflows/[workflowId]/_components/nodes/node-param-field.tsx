@@ -1,8 +1,8 @@
+import { AppNode, TaskInputParamType, TaskParamType } from '@/types/workflow';
 import { useReactFlow } from '@xyflow/react';
-import { AppNode, TaskInputParamType, TaskParamType } from '../../data';
-import { StringParam } from './param/string-param';
 import { useCallback } from 'react';
 import { BrowserInstanceParam } from './param/browserInstance-param';
+import { StringParam } from './param/string-param';
 
 export const NodeParamField = ({
   param,

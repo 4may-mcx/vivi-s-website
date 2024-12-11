@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { ChevronLeftIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { SaveBtn } from './save-btn';
+import { ExecuteBtn } from './execute-btn';
 
 export const TopBar = ({
   title,
@@ -31,7 +32,10 @@ export const TopBar = ({
           )}
         </div>
       </div>
-      <SaveBtn workflowId={workflowId} />
+      <div className="flex gap-2">
+        <ExecuteBtn workflowId={workflowId} />
+        <SaveBtn workflowId={workflowId} />
+      </div>
     </header>
   );
 };

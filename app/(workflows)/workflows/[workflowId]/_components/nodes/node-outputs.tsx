@@ -1,9 +1,9 @@
 'use client';
 
-import { ReactNode } from 'react';
-import { TaskOutputParamType } from '../../data';
-import { Handle, Position } from '@xyflow/react';
 import { cn } from '@/lib/utils';
+import { TaskOutputParamType } from '@/types/workflow';
+import { Handle, Position } from '@xyflow/react';
+import { ReactNode } from 'react';
 import { ColorForHandle } from './common';
 
 export const NodeOutputs = ({ children }: { children: ReactNode }) => {

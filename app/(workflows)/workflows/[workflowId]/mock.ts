@@ -1,4 +1,4 @@
-import { FlowInputType } from './data';
+import { FlowInputType } from '@/types/workflow';
 
 export const FlowInput: FlowInputType = {
   userAvgRate: {

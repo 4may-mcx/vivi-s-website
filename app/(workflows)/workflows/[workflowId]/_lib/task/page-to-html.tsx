@@ -1,7 +1,7 @@
+import { WorkflowTask, TaskParamType, TaskType } from '@/types/workflow';
 import { CodeIcon, LucideProps } from 'lucide-react';
-import { RegistryItemType, TaskParamType, TaskType } from '../../data';
 
-export const PageToHtmlTask: RegistryItemType = {
+export const PageToHtmlTask: WorkflowTask = {
   type: TaskType.PAGE_TO_HTML,
   label: 'Get html from page',
   icon: (props: LucideProps) => (

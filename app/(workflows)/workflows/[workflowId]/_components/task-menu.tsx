@@ -6,9 +6,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { TaskType } from '../data';
-import { TaskRegistry } from '../_lib/task/registry';
 import { Button } from '@/components/ui/button';
+import { TaskType } from '@/types/workflow';
+import { TaskRegistry } from '../_lib/task/registry';
 
 const TaskMenuBtn = ({ taskType }: { taskType: TaskType }) => {
   const task = TaskRegistry[taskType];

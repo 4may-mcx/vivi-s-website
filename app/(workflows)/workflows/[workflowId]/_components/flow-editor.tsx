@@ -1,5 +1,6 @@
 'use client';
 
+import { AppNode, TaskType } from '@/types/workflow';
 import { Workflow } from '@prisma/client';
 import {
   addEdge,
@@ -8,20 +9,19 @@ import {
   Connection,
   Controls,
   Edge,
+  getOutgoers,
   MiniMap,
   ReactFlow,
   useEdgesState,
   useNodesState,
   useReactFlow,
-  getOutgoers,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { useCallback, useEffect } from 'react';
-import { NodeComponent } from './nodes/node-component';
 import { createFlowNode } from '../_lib/createFlowNode';
-import { AppNode, TaskType } from '../data';
-import { DeletableEdge } from './edges/deletableEdge';
 import { TaskRegistry } from '../_lib/task/registry';
+import { DeletableEdge } from './edges/deletableEdge';
+import { NodeComponent } from './nodes/node-component';
 
 const nodeTypes = {
   FlowScrapeNode: NodeComponent,

@@ -1,4 +1,4 @@
-import { AppNode, TaskType } from '../data';
+import { AppNode, TaskType } from '@/types/workflow';
 
 const generateNodeId = (nodeType: TaskType) =>
   `$$__${nodeType}_${crypto.randomUUID()}__$$`;

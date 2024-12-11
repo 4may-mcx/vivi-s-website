@@ -1,7 +1,7 @@
+import { WorkflowTask, TaskParamType, TaskType } from '@/types/workflow';
 import { LucideProps, TextIcon } from 'lucide-react';
-import { RegistryItemType, TaskParamType, TaskType } from '../../data';
 
-export const ExtractTextFromElementTask: RegistryItemType = {
+export const ExtractTextFromElementTask: WorkflowTask = {
   type: TaskType.EXTRACT_TEXT_FROM_ELEMENT,
   label: 'Extract text from element',
   icon: (props: LucideProps) => (

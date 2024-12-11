@@ -1,10 +1,9 @@
-import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
+import { TaskInputParamType } from '@/types/workflow';
 import { Handle, Position, useEdges } from '@xyflow/react';
 import { ReactNode } from 'react';
-import { TaskInputParamType } from '../../data';
-import { NodeParamField } from './node-param-field';
 import { ColorForHandle } from './common';
+import { NodeParamField } from './node-param-field';
 
 export const NodeInputs = ({ children }: { children: ReactNode }) => {
   return <div className="flex flex-col gap-2 divide-y">{children}</div>;

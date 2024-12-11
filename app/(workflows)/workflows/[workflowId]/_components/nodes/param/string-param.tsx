@@ -2,9 +2,9 @@
 
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { ReactNode, useEffect, useId, useState } from 'react';
-import { TaskParamProps } from '../../../data';
 import { Textarea } from '@/components/ui/textarea';
+import { TaskParamProps } from '@/types/workflow';
+import { ReactNode, useEffect, useId, useState } from 'react';
 
 export const StringParam = ({
   param,

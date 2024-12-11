@@ -1,16 +1,13 @@
 'use server';
 
 import { createFlowNode } from '@/app/(workflows)/workflows/[workflowId]/_lib/createFlowNode';
-import {
-  AppNode,
-  TaskType,
-} from '@/app/(workflows)/workflows/[workflowId]/data';
 import prisma from '@/lib/prisma';
 import {
   createWorkflowSchema,
   CreateWorkflowSchemaType,
 } from '@/schema/workflow';
-import { WorkflowStatus } from '@/types/workflow';
+import { AppNode, TaskType } from '@/types/workflow';
+import { WorkflowStatus } from '@/types/workflow/workflow';
 import { auth } from '@clerk/nextjs/server';
 import { Edge } from '@xyflow/react';
 

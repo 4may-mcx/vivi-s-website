@@ -1,7 +1,7 @@
 'use server';
 
 import prisma from '@/lib/prisma';
-import { WorkflowStatus } from '@/types/workflow';
+import { WorkflowStatus } from '@/types/workflow/workflow';
 import { auth } from '@clerk/nextjs/server';
 import { Workflow } from '@prisma/client';
 

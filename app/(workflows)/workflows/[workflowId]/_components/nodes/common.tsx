@@ -1,4 +1,4 @@
-import { TaskParamType } from '../../data';
+import { TaskParamType } from '@/types/workflow';
 
 export const ColorForHandle: Record<TaskParamType, string> = {
   [TaskParamType.STRING]: '!bg-amber-400',

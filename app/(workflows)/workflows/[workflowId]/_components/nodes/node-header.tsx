@@ -1,10 +1,10 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { CoinsIcon, CopyIcon, GripVerticalIcon, TrashIcon } from 'lucide-react';
-import { TaskRegistry } from '../../_lib/task/registry';
-import { AppNode, TaskType } from '../../data';
+import { AppNode, TaskType } from '@/types/workflow';
 import { useReactFlow } from '@xyflow/react';
+import { CopyIcon, GripVerticalIcon, TrashIcon } from 'lucide-react';
 import { createFlowNode } from '../../_lib/createFlowNode';
+import { TaskRegistry } from '../../_lib/task/registry';
 
 const COPY_OFFSET = 140;
 
