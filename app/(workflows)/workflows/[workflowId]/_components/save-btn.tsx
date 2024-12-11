@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useMutation } from '@tanstack/react-query';
 import { useReactFlow } from '@xyflow/react';
 import { CheckIcon } from 'lucide-react';
+import { useCallback, useEffect } from 'react';
 import { toast } from 'sonner';
 
 export const SaveBtn = ({ workflowId }: { workflowId: string }) => {
@@ -20,13 +21,28 @@ export const SaveBtn = ({ workflowId }: { workflowId: string }) => {
     },
   });
 
-  const handleSave = () => {
+  const handleSave = useCallback(() => {
     toast.loading('保存中...', { id: 'save-workflow' });
     mutate({
       id: workflowId,
       workflow: { definition: JSON.stringify(toObject()) },
     });
-  };
+  }, [workflowId, toObject, mutate]);
+
+  // 监听页面全局快捷键， ctrl + s 或者 cmd + s保存
+  useEffect(() => {
+    const handleSaveByShortcut = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+        event.preventDefault();
+        handleSave();
+      }
+    };
+
+    window.addEventListener('keydown', handleSaveByShortcut);
+    return () => {
+      window.removeEventListener('keydown', handleSaveByShortcut);
+    };
+  }, [handleSave]);
 
   return (
     <Button

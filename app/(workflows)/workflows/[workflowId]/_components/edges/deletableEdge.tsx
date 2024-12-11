@@ -5,13 +5,13 @@ import {
   BaseEdge,
   EdgeLabelRenderer,
   EdgeProps,
-  getSmoothStepPath,
+  getSimpleBezierPath,
   useReactFlow,
 } from '@xyflow/react';
 import { XIcon } from 'lucide-react';
 
 export const DeletableEdge = (props: EdgeProps) => {
-  const [edgePath, labelX, labelY] = getSmoothStepPath(props);
+  const [edgePath, labelX, labelY] = getSimpleBezierPath(props);
   const { setEdges } = useReactFlow();
 
   const handleDeleteEdge = () => {

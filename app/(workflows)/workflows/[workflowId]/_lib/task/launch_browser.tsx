@@ -5,7 +5,7 @@ export const LaunchBrowserTask: RegistryItemType = {
   type: TaskType.LAUNCH_BROWSER,
   label: 'Launch browser',
   icon: (props: LucideProps) => (
-    <GlobeIcon className="stroke-green-800" {...props} />
+    <GlobeIcon className="stroke-pink-400" {...props} />
   ),
   isEntryPoint: true,
   inputs: [

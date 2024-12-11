@@ -5,7 +5,7 @@ export const PageToHtmlTask: RegistryItemType = {
   type: TaskType.PAGE_TO_HTML,
   label: 'Get html from page',
   icon: (props: LucideProps) => (
-    <CodeIcon className="stroke-green-800" {...props} />
+    <CodeIcon className="stroke-pink-400" {...props} />
   ),
   isEntryPoint: false,
   inputs: [
@@ -17,7 +17,7 @@ export const PageToHtmlTask: RegistryItemType = {
   ],
   outputs: [
     {
-      name: 'html',
+      name: 'Html',
       type: TaskParamType.STRING,
     },
     {
