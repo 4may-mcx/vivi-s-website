@@ -23,7 +23,7 @@ export const StringParam = ({
         id={id}
         value={internalValue}
         onChange={(e) => setInternalValue(e.target.value)}
-        onBlur={(e) => updateNodeParamValue(e.target.value)}
+        onBlur={(e) => updateNodeParamValue?.(e.target.value)}
         placeholder="请在这里输入"
         className="text-xs"
       />

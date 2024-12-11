@@ -19,9 +19,14 @@ import { useCallback, useEffect } from 'react';
 import { NodeComponent } from './nodes/node-component';
 import { createFlowNode } from '../_lib/createFlowNode';
 import { AppNode, TaskType } from '../data';
+import { DeletableEdge } from './edges/deletableEdge';
 
 const nodeTypes = {
   FlowScrapeNode: NodeComponent,
+};
+
+const edgeTypes = {
+  default: DeletableEdge,
 };
 
 const snapGrid: [number, number] = [12, 12];
@@ -84,6 +89,7 @@ export const FlowEditor = ({ workflow }: { workflow: Workflow | null }) => {
         onDragOver={onDragOver}
         onDrop={onDrop}
         nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
         snapToGrid
         snapGrid={snapGrid}
         fitView
