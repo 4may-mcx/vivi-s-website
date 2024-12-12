@@ -1,11 +1,11 @@
 'use server';
 
+import { executeWorkflow } from '@/app/(workflows)/workflows/[workflowId]/_lib/excuteWorkflow';
 import { flowToExecutionPlan } from '@/app/(workflows)/workflows/[workflowId]/_lib/executionPlan';
 import { TaskRegistry } from '@/app/(workflows)/workflows/[workflowId]/_lib/task/registry';
 import prisma from '@/lib/prisma';
 import {
   WorkflowExecutionPhaseStatus,
-  WorkflowExecutionPlan,
   WorkflowExecutionStatus,
   WorkflowExecutionTrigger,
 } from '@/types/workflow';
@@ -72,6 +72,8 @@ export const RunWorkflow = async ({
   if (!execution) {
     throw new Error('Failed to create workflow execution');
   }
+
+  executeWorkflow(execution.id);
 
   return redirect(`/workflows/${workflowId}/runs/${execution.id}`);
 };

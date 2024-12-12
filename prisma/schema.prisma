@@ -31,7 +31,11 @@ model Workflow {
   description String?
 
   definition String @db.LongText
-  status     String
+  status     String // DRAFT | PUBLISHED
+
+  lastRunAt     DateTime?
+  lastRunId     String?
+  lastRunStatus String?
 
   createdTime DateTime @default(now())
   updatedTime DateTime @updatedAt
@@ -51,11 +55,11 @@ model WorkflowExecution {
   startedTime   DateTime?
   completedTime DateTime?
 
-  workflow Workflow         @relation(fields: [workflowId], references: [id], onDelete: Cascade)
-  phases   ExecutionPhase[]
+  workflow Workflow                 @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+  phases   WorkflowExecutionPhase[]
 }
 
-model ExecutionPhase {
+model WorkflowExecutionPhase {
   id            String    @id @default(cuid())
   userId        String
   status        String
