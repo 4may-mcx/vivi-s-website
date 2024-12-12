@@ -10,10 +10,12 @@ export const TopBar = ({
   title,
   subTitle,
   workflowId,
+  hideBtns = false,
 }: {
   title: string;
   subTitle?: string;
   workflowId: string;
+  hideBtns?: boolean;
 }) => {
   const router = useRouter();
 
@@ -32,10 +34,12 @@ export const TopBar = ({
           )}
         </div>
       </div>
-      <div className="flex gap-2">
-        <ExecuteBtn workflowId={workflowId} />
-        <SaveBtn workflowId={workflowId} />
-      </div>
+      {!hideBtns && (
+        <div className="flex gap-2">
+          <ExecuteBtn workflowId={workflowId} />
+          <SaveBtn workflowId={workflowId} />
+        </div>
+      )}
     </header>
   );
 };

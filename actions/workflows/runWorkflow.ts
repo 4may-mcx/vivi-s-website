@@ -66,7 +66,6 @@ export const RunWorkflow = async ({
     },
     select: {
       id: true,
-      phases: true,
     },
   });
 
@@ -74,5 +73,5 @@ export const RunWorkflow = async ({
     throw new Error('Failed to create workflow execution');
   }
 
-  return redirect(`/workflows/runs/${workflowId}/${execution.id}`);
+  return redirect(`/workflows/${workflowId}/runs/${execution.id}`);
 };

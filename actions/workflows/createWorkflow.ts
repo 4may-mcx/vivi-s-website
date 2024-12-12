@@ -40,6 +40,9 @@ export const CreateWorkflow = async (form: CreateWorkflowSchemaType) => {
       definition: JSON.stringify(getInitialFlow()),
       ...data,
     },
+    select: {
+      id: true,
+    },
   });
 
   if (!result) {
