@@ -3,6 +3,7 @@
 import { cn } from '@/lib/utils';
 import { useReactFlow } from '@xyflow/react';
 import { ReactNode } from 'react';
+import { useFlowValidation } from '../../_hooks/use-flow-validation';
 
 export const NodeCard = ({
   children,
@@ -14,6 +15,10 @@ export const NodeCard = ({
   isSelected?: boolean;
 }) => {
   const { getNode, setCenter } = useReactFlow();
+  const { invalidInputs } = useFlowValidation();
+  const hasInvalidInput = invalidInputs.some(
+    (input) => input.nodeId === nodeId,
+  );
 
   const handDoubleClick = () => {
     const node = getNode(nodeId);
@@ -41,6 +46,7 @@ export const NodeCard = ({
       className={cn(
         'flex w-[420px] border-separate cursor-pointer flex-col gap-1 rounded-md border-2 bg-background text-xs',
         isSelected && 'border-primary',
+        hasInvalidInput && 'border-2 border-destructive',
       )}
     >
       {children}

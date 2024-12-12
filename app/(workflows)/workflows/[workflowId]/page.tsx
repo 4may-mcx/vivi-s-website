@@ -14,8 +14,8 @@ export default async function WorkflowEditorPage({
 
   return (
     <div className="flex h-full w-full flex-col overflow-hidden">
-      <ReactFlowProvider>
-        <FlowValidationContextProvider>
+      <FlowValidationContextProvider>
+        <ReactFlowProvider>
           <TopBar
             title="WorkFlow Editor"
             subTitle="逐字稿编辑"
@@ -25,8 +25,8 @@ export default async function WorkflowEditorPage({
             <TaskMenu />
             <FlowEditor workflow={workflow} />
           </div>
-        </FlowValidationContextProvider>
-      </ReactFlowProvider>
+        </ReactFlowProvider>
+      </FlowValidationContextProvider>
     </div>
   );
 }
