@@ -10,6 +10,7 @@ import { AppNode, TaskType } from '@/types/workflow';
 import { WorkflowStatus } from '@/types/workflow/workflow';
 import { auth } from '@clerk/nextjs/server';
 import { Edge } from '@xyflow/react';
+import { redirect } from 'next/navigation';
 
 const getInitialFlow = () => {
   const initialFlow: { nodes: AppNode[]; edges: Edge[] } = {
@@ -45,5 +46,5 @@ export const CreateWorkflow = async (form: CreateWorkflowSchemaType) => {
     throw new Error('failed to create workflow');
   }
 
-  return result;
+  return redirect(`/workflows/${result.id}`);
 };

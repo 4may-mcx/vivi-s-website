@@ -36,5 +36,37 @@ model Workflow {
   createdTime DateTime @default(now())
   updatedTime DateTime @updatedAt
 
+  executions WorkflowExecution[]
+
   @@unique([name, userId])
+}
+
+model WorkflowExecution {
+  id            String    @id @default(cuid())
+  workflowId    String
+  userId        String
+  trigger       String
+  status        String
+  createdTime   DateTime  @default(now())
+  startedTime   DateTime?
+  completedTime DateTime?
+
+  workflow Workflow         @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+  phases   ExecutionPhase[]
+}
+
+model ExecutionPhase {
+  id            String    @id @default(cuid())
+  userId        String
+  status        String
+  number        Int
+  node          String    @db.LongText
+  name          String
+  startedTime   DateTime?
+  completedTime DateTime?
+  inputs        String?   @db.LongText
+  outputs       String?   @db.LongText
+
+  workflowExecutionId String
+  workflowExecution   WorkflowExecution @relation(fields: [workflowExecutionId], references: [id], onDelete: Cascade)
 }

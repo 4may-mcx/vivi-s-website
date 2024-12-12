@@ -24,6 +24,25 @@ export interface WorkflowExecutionPlanPhase {
 
 export type WorkflowExecutionPlan = WorkflowExecutionPlanPhase[];
 
+export enum WorkflowExecutionStatus {
+  PENDING = 'PENDING',
+  RUNNING = 'RUNNING',
+  COMPLETED = 'COMPLETED',
+  FAILED = 'FAILED',
+}
+
+export enum WorkflowExecutionTrigger {
+  MANUAL = 'MANUAL',
+}
+
+export enum WorkflowExecutionPhaseStatus {
+  CREATED = 'CREATED',
+  PENDING = 'PENDING',
+  RUNNING = 'RUNNING',
+  COMPLETED = 'COMPLETED',
+  FAILED = 'FAILED',
+}
+
 export interface FlowVariableItemType {
   label: string;
   value: string | number | boolean;
