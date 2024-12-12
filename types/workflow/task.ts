@@ -27,7 +27,7 @@ export type TaskOutputParamType = TaskParamBasicType;
 
 export interface TaskParamProps {
   param: TaskInputParamType;
-  value?: string;
-  updateNodeParamValue?: (newValue: string) => void;
+  value: string;
+  updateNodeParamValue: (newValue: string) => void;
   disabled?: boolean;
 }

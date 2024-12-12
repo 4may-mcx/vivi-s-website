@@ -13,6 +13,7 @@ export const PageToHtmlTask: WorkflowTask = {
       name: 'Web page',
       type: TaskParamType.BROWSER_INSTANCE,
       required: true,
+      value: '',
     },
   ],
   outputs: [

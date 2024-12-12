@@ -113,7 +113,7 @@ export const FlowEditor = ({ workflow }: { workflow: Workflow | null }) => {
       const targetTask = TaskRegistry[target.data.type];
 
       const output = sourceTask.outputs?.find(
-        (output) => output.name === connection.targetHandle,
+        (output) => output.name === connection.sourceHandle,
       );
 
       const input = targetTask.inputs?.find(

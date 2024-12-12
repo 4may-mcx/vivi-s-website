@@ -15,7 +15,7 @@ export const NodeParamField = ({
 }) => {
   const { updateNodeData, getNode } = useReactFlow();
   const node = getNode(nodeId) as AppNode;
-  const value = node?.data.inputs?.[param.name];
+  const value = node?.data.inputs?.[param.name] ?? '';
 
   const updateNodeParamValue = useCallback(
     (newValue: string) => {
@@ -40,7 +40,13 @@ export const NodeParamField = ({
         />
       );
     case TaskParamType.BROWSER_INSTANCE:
-      return <BrowserInstanceParam param={param} />;
+      return (
+        <BrowserInstanceParam
+          param={param}
+          value={value}
+          updateNodeParamValue={updateNodeParamValue}
+        />
+      );
     default:
       return (
         <div className="w-full">

@@ -13,7 +13,7 @@ export interface WorkflowTask {
   label: string;
   icon: (props: LucideProps) => ReactNode;
   isEntryPoint?: boolean;
-  inputs?: TaskInputParamType[];
+  inputs: TaskInputParamType[];
   outputs?: TaskOutputParamType[];
 }
 

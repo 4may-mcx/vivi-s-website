@@ -6,6 +6,9 @@ import { NodeCard } from './node-card';
 import { NodeHeader } from './node-header';
 import { NodeInput, NodeInputs } from './node-inputs';
 import { NodeOutput, NodeOutputs } from './node-outputs';
+import { Badge } from '@/components/ui/badge';
+
+const DEV_MODE = process.env.NEXT_PUBLIC_DEV_MODE === 'true';
 
 export const NodeComponent = memo(({ id, selected, data }: NodeProps) => {
   const nodeData = data as AppNodeData;
@@ -13,6 +16,7 @@ export const NodeComponent = memo(({ id, selected, data }: NodeProps) => {
 
   return (
     <NodeCard nodeId={id} isSelected={selected}>
+      {DEV_MODE && <Badge className="rounded-sm rounded-b-none">{id}</Badge>}
       <NodeHeader taskType={nodeData.type} nodeId={id} />
       <NodeInputs>
         {task?.inputs &&
