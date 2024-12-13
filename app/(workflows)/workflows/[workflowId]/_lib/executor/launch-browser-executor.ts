@@ -17,8 +17,8 @@ export const LaunchBrowserExecutor = async (
     environment.setPage(page);
 
     await page.goto(websiteUrl);
-  } catch (error) {
-    console.error('@LAUNCH_BROWSER_ERROR: ', error);
+  } catch (error: any) {
+    environment.log.error(error.message);
     return false;
   }
 

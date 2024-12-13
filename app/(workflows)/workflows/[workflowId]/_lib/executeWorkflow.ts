@@ -1,8 +1,10 @@
 import 'server-only';
 
+import { createLogCollector } from '@/lib/log';
 import prisma from '@/lib/prisma';
 import {
   AppNode,
+  LogCollector,
   TaskParamType,
   WorkflowExecutionPhaseStatus,
   WorkflowExecutionStatus,
@@ -11,11 +13,11 @@ import {
   WorkflowTaskEnvironment,
 } from '@/types/workflow';
 import { Prisma, WorkflowExecutionPhase } from '@prisma/client';
+import { Edge } from '@xyflow/react';
 import { revalidatePath } from 'next/cache';
 import { Browser, Page } from 'puppeteer';
 import { ExecutorRegistry } from './executor/registry';
 import { TaskRegistry } from './task/registry';
-import { Edge } from '@xyflow/react';
 
 const initializeWorkflowExecution = async (
   executionId: string,
@@ -87,6 +89,7 @@ const finalizeWorkflowExecution = async (
 const createExecutionEnvironment = <T extends WorkflowTask>(
   node: AppNode,
   globalEnvironment: WorkflowGlobalEnvironment,
+  logCollector: LogCollector,
 ): WorkflowTaskEnvironment<T> => {
   return {
     getInput: (name: string) => globalEnvironment.phases[node.id]?.inputs[name],
@@ -104,6 +107,8 @@ const createExecutionEnvironment = <T extends WorkflowTask>(
     setPage: (page: Page) => {
       globalEnvironment.page = page;
     },
+
+    log: logCollector,
   };
 };
 
@@ -121,13 +126,18 @@ const executePhase = async (
   phase: WorkflowExecutionPhase,
   node: AppNode,
   environment: WorkflowGlobalEnvironment,
+  logCollector: LogCollector,
 ) => {
   const executor = ExecutorRegistry[node.data.type];
   if (!executor) {
     return false;
   }
 
-  const executionEnvironment = createExecutionEnvironment(node, environment);
+  const executionEnvironment = createExecutionEnvironment(
+    node,
+    environment,
+    logCollector,
+  );
 
   return await executor(executionEnvironment);
 };
@@ -193,6 +203,8 @@ const executeWorkflowPhase = async (
   environment: WorkflowGlobalEnvironment,
   edges: Edge[],
 ) => {
+  const logCollector = createLogCollector();
+
   const startedTime = new Date();
   const node = JSON.parse(phase.node) as AppNode;
 
@@ -207,7 +219,7 @@ const executeWorkflowPhase = async (
     },
   });
 
-  const success = await executePhase(phase, node, environment);
+  const success = await executePhase(phase, node, environment, logCollector);
 
   const completedTime = new Date();
   await prisma.workflowExecutionPhase.update({
@@ -218,6 +230,15 @@ const executeWorkflowPhase = async (
         : WorkflowExecutionPhaseStatus.FAILED,
       completedTime,
       outputs: JSON.stringify(environment.phases[node.id].outputs),
+      logs: {
+        createMany: {
+          data: logCollector.getAll().map((log) => ({
+            logLevel: log.level,
+            message: log.message,
+            timestamp: log.timestamp,
+          })),
+        },
+      },
     },
   });
 
@@ -250,6 +271,7 @@ export const executeWorkflow = async (executionId: string) => {
   let executionFailed = false;
 
   for (const phase of execution.phases) {
+    // 每个阶段创建一个新的，互相隔离
     const phaseExecution = await executeWorkflowPhase(
       phase,
       environment,

@@ -7,8 +7,8 @@ export const PageToHtmlExecutor = async (
   try {
     const html = await environment.getPage()!.content();
     environment.setOutput('Html', html);
-  } catch (error) {
-    console.error('@PAGE_TO_HTML_ERROR: ', error);
+  } catch (error: any) {
+    environment.log.error(error.message);
     return false;
   }
   return true;

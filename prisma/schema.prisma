@@ -74,5 +74,16 @@ model WorkflowExecutionPhase {
   outputs       String?   @db.LongText
 
   workflowExecutionId String
-  workflowExecution   WorkflowExecution @relation(fields: [workflowExecutionId], references: [id], onDelete: Cascade)
+  workflowExecution   WorkflowExecution      @relation(fields: [workflowExecutionId], references: [id], onDelete: Cascade)
+  logs                WorkflowExecutionLog[]
+}
+
+model WorkflowExecutionLog {
+  id        String   @id @default(cuid())
+  logLevel  String
+  message   String
+  timestamp DateTime @default(now())
+
+  executionPhaseId String
+  executionPhase   WorkflowExecutionPhase @relation(fields: [executionPhaseId], references: [id], onDelete: Cascade)
 }
