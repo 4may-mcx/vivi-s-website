@@ -55,6 +55,8 @@ model WorkflowExecution {
   startedTime   DateTime?
   completedTime DateTime?
 
+  definition String @db.LongText
+
   workflow Workflow                 @relation(fields: [workflowId], references: [id], onDelete: Cascade)
   phases   WorkflowExecutionPhase[]
 }

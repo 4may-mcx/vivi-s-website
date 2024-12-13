@@ -14,7 +14,7 @@ export interface WorkflowTask {
   icon: (props: LucideProps) => ReactNode;
   isEntryPoint?: boolean;
   inputs: TaskInputParamType[];
-  outputs?: TaskOutputParamType[];
+  outputs: TaskOutputParamType[];
 }
 
 export interface WorkflowExecutionPlanPhase {

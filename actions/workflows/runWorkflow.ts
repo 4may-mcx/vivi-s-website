@@ -1,6 +1,6 @@
 'use server';
 
-import { executeWorkflow } from '@/app/(workflows)/workflows/[workflowId]/_lib/excuteWorkflow';
+import { executeWorkflow } from '@/app/(workflows)/workflows/[workflowId]/_lib/executeWorkflow';
 import { flowToExecutionPlan } from '@/app/(workflows)/workflows/[workflowId]/_lib/executionPlan';
 import { TaskRegistry } from '@/app/(workflows)/workflows/[workflowId]/_lib/task/registry';
 import prisma from '@/lib/prisma';
@@ -52,6 +52,7 @@ export const RunWorkflow = async ({
       startedTime: new Date(),
       status: WorkflowExecutionStatus.PENDING,
       trigger: WorkflowExecutionTrigger.MANUAL,
+      definition: flowDefinition,
       phases: {
         create: executionPlanVO.executionPlan.flatMap((executionPhase) =>
           executionPhase.nodes.map((node) => ({
