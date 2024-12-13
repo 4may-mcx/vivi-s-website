@@ -3,7 +3,7 @@ import { ReactFlowProvider } from '@xyflow/react';
 import { redirect } from 'next/navigation';
 import { FlowEditor } from './_components/flow-editor';
 import { TaskMenu } from './_components/task-menu';
-import { TopBar } from './_components/top-bar';
+import { TopBar } from './_components/topBar/top-bar';
 import { FlowValidationContextProvider } from './_context/flow-validation-context';
 
 export default async function WorkflowEditorPage({

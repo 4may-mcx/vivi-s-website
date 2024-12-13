@@ -6,7 +6,7 @@ import { auth } from '@clerk/nextjs/server';
 export const GetWorkflowsForUser = async () => {
   const { userId } = await auth();
   if (!userId) {
-    throw new Error('unAuthenticated');
+    throw new Error('Unauthorized');
   }
 
   return prisma.workflow.findMany({

@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useReactFlow } from '@xyflow/react';
 import { PlayIcon } from 'lucide-react';
 import { toast } from 'sonner';
-import { useExecutionPlan } from '../_hooks/use-execution-plan';
+import { useExecutionPlan } from '../../_hooks/use-execution-plan';
 
 export const ExecuteBtn = ({ workflowId }: { workflowId: string }) => {
   const generate = useExecutionPlan();

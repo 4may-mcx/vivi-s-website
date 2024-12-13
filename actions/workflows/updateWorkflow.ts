@@ -14,7 +14,7 @@ export const UpdateWorkflow = async ({
 }) => {
   const { userId } = await auth();
   if (!userId) {
-    throw new Error('unAuthenticated');
+    throw new Error('Unauthorized');
   }
 
   const result = await prisma.workflow.findUnique({

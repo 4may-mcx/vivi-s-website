@@ -5,6 +5,7 @@ import { ChevronLeftIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { SaveBtn } from './save-btn';
 import { ExecuteBtn } from './execute-btn';
+import { NavigationTabs } from './navigation-tabs';
 
 export const TopBar = ({
   title,
@@ -20,7 +21,7 @@ export const TopBar = ({
   const router = useRouter();
 
   return (
-    <header className="sticky top-0 z-10 flex h-[60px] w-full border-separate justify-between border-b-2 bg-background p-2">
+    <header className="sticky top-0 z-10 flex h-[60px] w-full border-separate items-center justify-between border-b-2 bg-background p-2">
       <div className="flex flex-1 gap-1">
         <Button variant="ghost" size="icon" onClick={() => router.back()}>
           <ChevronLeftIcon size={32} />
@@ -34,12 +35,15 @@ export const TopBar = ({
           )}
         </div>
       </div>
-      {!hideBtns && (
-        <div className="flex gap-2">
-          <ExecuteBtn workflowId={workflowId} />
-          <SaveBtn workflowId={workflowId} />
-        </div>
-      )}
+      <NavigationTabs workflowId={workflowId} />
+      <div className="flex flex-1 justify-end gap-1">
+        {!hideBtns && (
+          <>
+            <ExecuteBtn workflowId={workflowId} />
+            <SaveBtn workflowId={workflowId} />
+          </>
+        )}
+      </div>
     </header>
   );
 };

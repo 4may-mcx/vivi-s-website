@@ -3,23 +3,22 @@
 import prisma from '@/lib/prisma';
 import { auth } from '@clerk/nextjs/server';
 
-export const DeleteWorkflow = async (workflowId: string) => {
+export const GetWorkflowExecutions = async (workflowId: string) => {
   const { userId } = await auth();
 
   if (!userId) {
     throw new Error('Unauthorized');
   }
 
-  const result = await prisma.workflow.delete({
+  const executions = await prisma.workflowExecution.findMany({
     where: {
-      id: workflowId,
+      workflowId,
       userId,
+    },
+    orderBy: {
+      createdTime: 'desc',
     },
   });
 
-  if (!result) {
-    throw new Error('failed to delete workflow');
-  }
-
-  return result;
+  return executions;
 };

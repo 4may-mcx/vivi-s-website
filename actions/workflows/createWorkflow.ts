@@ -30,7 +30,7 @@ export const CreateWorkflow = async (form: CreateWorkflowSchemaType) => {
   const { userId } = await auth();
 
   if (!userId) {
-    throw new Error('unAuthenticated');
+    throw new Error('Unauthorized');
   }
 
   const result = await prisma.workflow.create({

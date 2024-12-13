@@ -6,7 +6,7 @@ import { auth } from '@clerk/nextjs/server';
 export const GetWorkExecutionWithPhases = async (executionId: string) => {
   const { userId } = await auth();
   if (!userId) {
-    throw new Error('unAuthenticated');
+    throw new Error('Unauthorized');
   }
 
   const execution = await prisma.workflowExecution.findUnique({

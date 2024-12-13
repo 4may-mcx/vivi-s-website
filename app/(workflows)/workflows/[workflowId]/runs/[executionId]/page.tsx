@@ -1,7 +1,7 @@
 import { GetWorkExecutionWithPhases } from '@/actions/workflows/getWorkExecutionWithPhases';
 import { Loader2Icon } from 'lucide-react';
 import { Suspense } from 'react';
-import { TopBar } from '../../_components/top-bar';
+import { TopBar } from '../../_components/topBar/top-bar';
 import { ExecutionViewer } from './_components/execution-viewer';
 import { redirect } from 'next/navigation';
 
