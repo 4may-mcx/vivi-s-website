@@ -40,7 +40,7 @@ export const TaskMenu = () => {
       <Accordion
         type="multiple"
         className="w-full"
-        defaultValue={['extraction']}
+        defaultValue={['extraction', 'variable']}
       >
         <AccordionItem value="extraction">
           <AccordionTrigger className="font-bold">
@@ -49,6 +49,15 @@ export const TaskMenu = () => {
           <AccordionContent className="flex flex-col gap-1">
             <TaskMenuBtn taskType={TaskType.PAGE_TO_HTML} />
             <TaskMenuBtn taskType={TaskType.EXTRACT_TEXT_FROM_ELEMENT} />
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="variable">
+          <AccordionTrigger className="font-bold">
+            Variable Calculate
+          </AccordionTrigger>
+          <AccordionContent className="flex flex-col gap-1">
+            <TaskMenuBtn taskType={TaskType.VARIABLE_GROUP} />
+            <TaskMenuBtn taskType={TaskType.VARIABLE_CALC} />
           </AccordionContent>
         </AccordionItem>
       </Accordion>

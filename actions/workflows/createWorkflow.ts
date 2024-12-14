@@ -17,7 +17,7 @@ const getInitialFlow = () => {
     nodes: [],
     edges: [],
   };
-  initialFlow.nodes.push(createFlowNode(TaskType.LAUNCH_BROWSER));
+  initialFlow.nodes.push(createFlowNode(TaskType.VARIABLE_GROUP));
   return initialFlow;
 };
 

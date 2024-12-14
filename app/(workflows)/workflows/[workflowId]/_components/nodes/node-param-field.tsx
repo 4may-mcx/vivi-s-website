@@ -3,6 +3,8 @@ import { useReactFlow } from '@xyflow/react';
 import { useCallback } from 'react';
 import { BrowserInstanceParam } from './param/browserInstance-param';
 import { StringParam } from './param/string-param';
+import { VariableSelectParam } from './param/variable-select-param';
+import { VariableGroupParam } from './param/variable-group-param';
 
 export const NodeParamField = ({
   param,
@@ -42,6 +44,22 @@ export const NodeParamField = ({
     case TaskParamType.BROWSER_INSTANCE:
       return (
         <BrowserInstanceParam
+          param={param}
+          value={value}
+          updateNodeParamValue={updateNodeParamValue}
+        />
+      );
+    case TaskParamType.VARIABLE_SELECTOR:
+      return (
+        <VariableSelectParam
+          param={param}
+          value={value}
+          updateNodeParamValue={updateNodeParamValue}
+        />
+      );
+    case TaskParamType.VARIABLE_GROUP:
+      return (
+        <VariableGroupParam
           param={param}
           value={value}
           updateNodeParamValue={updateNodeParamValue}
