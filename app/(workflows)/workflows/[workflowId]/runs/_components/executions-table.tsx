@@ -37,39 +37,43 @@ export const ExecutionsTable = ({ workflowId }: { workflowId: string }) => {
   }
 
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>ID</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead>Started At</TableHead>
-          <TableHead>Actions</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {executions.map((execution) => (
-          <TableRow key={execution.id}>
-            <TableCell>{execution.id}</TableCell>
-            <TableCell>{execution.status}</TableCell>
-            <TableCell>
-              {execution.startedTime?.toLocaleString('en-US', {
-                dateStyle: 'short',
-                timeStyle: 'short',
-              })}
-            </TableCell>
-            <TableCell>
-              <Button
-                variant="outline"
-                onClick={() => {
-                  //   router.push(`/workflows/${workflowId}/runs/${execution.id}`);
-                }}
-              >
-                View
-              </Button>
-            </TableCell>
+    <div className="container py-6">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>ID</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead className="text-xs text-muted-foreground">
+              Started At
+            </TableHead>
+            <TableHead>Actions</TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {executions.map((execution) => (
+            <TableRow key={execution.id}>
+              <TableCell>{execution.id}</TableCell>
+              <TableCell>{execution.status}</TableCell>
+              <TableCell>
+                {execution.startedTime?.toLocaleString('en-US', {
+                  dateStyle: 'short',
+                  timeStyle: 'short',
+                })}
+              </TableCell>
+              <TableCell>
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    //   router.push(`/workflows/${workflowId}/runs/${execution.id}`);
+                  }}
+                >
+                  View
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   );
 };

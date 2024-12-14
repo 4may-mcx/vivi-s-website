@@ -28,7 +28,7 @@ export const useExecutionPlan = () => {
           break;
       }
     },
-    [setInvalidInputs, clearErrors],
+    [setInvalidInputs],
   );
 
   const generateExecutionPlan = useCallback(() => {
