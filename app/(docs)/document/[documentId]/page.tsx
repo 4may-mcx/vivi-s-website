@@ -7,7 +7,7 @@ interface DocumentPageProps {
 
 const DocumentPage = async ({ params }: DocumentPageProps) => {
   const { documentId } = params;
-  console.log(documentId);
+
   return (
     <div className="relative min-h-screen bg-[#F9FBFD]">
       <div className="fixed top-0 isolate z-50 w-full">

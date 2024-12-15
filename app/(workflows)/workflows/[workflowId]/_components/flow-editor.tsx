@@ -52,7 +52,7 @@ export const FlowEditor = ({ workflow }: { workflow: Workflow | null }) => {
       if (!flow.viewport) return;
       setViewport({ x: flow.viewport.x, y: flow.viewport.y, zoom: 1 });
     } catch (error) {}
-  }, [workflow]);
+  }, [setEdges, setNodes, setViewport, workflow]);
 
   const onConnect = useCallback(
     (connection: Connection) => {
@@ -121,7 +121,11 @@ export const FlowEditor = ({ workflow }: { workflow: Workflow | null }) => {
       );
 
       if (input?.type !== output?.type) {
-        console.log('invalid connection: input type not match output type');
+        console.log(
+          'invalid connection: input type not match output type',
+          input?.type,
+          output?.type,
+        );
         return false;
       }
 

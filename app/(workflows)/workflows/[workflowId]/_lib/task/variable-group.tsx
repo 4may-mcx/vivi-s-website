@@ -17,10 +17,5 @@ export const VariableGroupTask = {
       hideHandle: true,
     },
   ] as const,
-  outputs: [
-    {
-      name: 'params',
-      type: TaskParamType.VARIABLE_GROUP,
-    },
-  ] as const,
+  outputs: [] as const,
 } satisfies WorkflowTask;

@@ -9,9 +9,14 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { SubjectType } from '@/types/fake';
-import { TaskParamProps } from '@/types/workflow';
+import {
+  TaskOutputParamType,
+  TaskParamProps,
+  TaskParamType,
+} from '@/types/workflow';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
+import { useNodeTaskContext } from '../../../_context/node-task.context';
 
 export const VariableSelectParam = ({
   param,
@@ -19,6 +24,7 @@ export const VariableSelectParam = ({
   updateNodeParamValue,
   disabled,
 }: TaskParamProps) => {
+  const { setTask } = useNodeTaskContext();
   const [internalValue, setInternalValue] = useState(value ?? '');
 
   const query = useQuery({
@@ -27,8 +33,20 @@ export const VariableSelectParam = ({
   });
 
   useEffect(() => {
+    setTask((task) => {
+      const outputs = Object.values(query.data ?? {}).map((i) => ({
+        type: TaskParamType.STRING,
+        name: i.label,
+        value: i.value,
+      })) as TaskOutputParamType[];
+
+      return {
+        ...task,
+        outputs,
+      };
+    });
     setInternalValue(value ?? '');
-  }, [value]);
+  }, [value, setTask, query.data]);
 
   return (
     <div className="w-full space-y-1 p-1">

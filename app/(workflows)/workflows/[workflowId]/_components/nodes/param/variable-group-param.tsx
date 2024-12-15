@@ -16,7 +16,6 @@ export const VariableGroupParam = ({
   const id = useId();
 
   useEffect(() => {
-    console.log('@STRING_PARAM_VALUE_CHANGE', value);
     setInternalValue(value ?? '');
   }, [value]);
 

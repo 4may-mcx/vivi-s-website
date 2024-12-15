@@ -11,7 +11,7 @@ export const VariableCalcTask = {
   inputs: [
     {
       name: '输入变量组',
-      type: TaskParamType.VARIABLE_GROUP,
+      type: TaskParamType.STRING,
       helperText: '选择其中的变量进行使用',
     },
   ] as const,

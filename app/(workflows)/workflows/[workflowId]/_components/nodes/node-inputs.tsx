@@ -5,6 +5,7 @@ import { ReactNode } from 'react';
 import { ColorForHandle } from './common';
 import { NodeParamField } from './node-param-field';
 import { useFlowValidation } from '../../_hooks/use-flow-validation';
+import { useNodeTaskContext } from '../../_context/node-task.context';
 
 export const NodeInputs = ({ children }: { children: ReactNode }) => {
   return <div className="flex flex-col gap-2 divide-y">{children}</div>;
