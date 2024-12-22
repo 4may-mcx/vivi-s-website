@@ -14,7 +14,7 @@ const DocumentPage = async ({ params }: DocumentPageProps) => {
         <Toolbar />
       </div>
       <div className="w-full pt-16">
-        <Editor />
+        <Editor documentId={documentId} />
       </div>
     </div>
   );

@@ -1,5 +1,7 @@
 'use client';
 
+import { GetDocumentById } from '@/actions/mock/getDocumentById';
+import { UpdateDocumentById } from '@/actions/mock/updateDocumentById';
 import { useEditorStore } from '@/src/store/use-editor-store';
 import Color from '@tiptap/extension-color';
 import Dropcursor from '@tiptap/extension-dropcursor';
@@ -14,31 +16,36 @@ import Underline from '@tiptap/extension-underline';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import ImageResize from 'tiptap-extension-resize-image';
+import { useState } from 'react';
+import { VariableAutocomplete } from './_extensions/variable-auto-complete';
+import { Document_Variables } from './constant';
 
-export const Editor = () => {
+export const Editor = ({ documentId }: { documentId: string }) => {
   const { setEditor } = useEditorStore();
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
+
+  const handleTrigger = (view: any, from: any, to: any) => {
+    const coords = view.coordsAtPos(to);
+    setMenuPosition({ top: coords.top - 20, left: coords.left }); // 菜单位置
+    setMenuVisible(true);
+  };
+
+  const handleInsertVariable = (variable: string) => {
+    editor?.commands.insertContent(`${variable}}}`);
+    setMenuVisible(false);
+  };
 
   const editor = useEditor({
     onCreate: ({ editor }) => {
       setEditor(editor);
+      GetDocumentById(documentId).then((content) => {
+        editor.commands.setContent(content ?? '');
+      });
     },
     onUpdate: ({ editor }) => {
       setEditor(editor);
-    },
-    onFocus: ({ editor }) => {
-      setEditor(editor);
-    },
-    onTransaction: ({ editor }) => {
-      setEditor(editor);
-    },
-    onBlur: ({ editor }) => {
-      setEditor(editor);
-    },
-    onContentError: ({ editor }) => {
-      setEditor(editor);
-    },
-    onDestroy: () => {
-      setEditor(null);
+      UpdateDocumentById(documentId, editor.getHTML());
     },
     extensions: [
       Highlight.configure({ multicolor: true }),
@@ -53,8 +60,10 @@ export const Editor = () => {
       Dropcursor,
       Underline,
       TaskList,
+      VariableAutocomplete.configure({
+        onTrigger: handleTrigger,
+      }),
     ],
-    content: '<p>Hello World!</p>',
     editorProps: {
       attributes: {
         style: 'padding-left: 56px; padding-right: 56px;',
@@ -63,11 +72,38 @@ export const Editor = () => {
       },
     },
   });
+
   return (
-    <div className="size-full overflow-x-auto bg-[#F9FBFD] px-4 print:overflow-visible print:bg-white print:p-0">
+    <div className="relative size-full overflow-x-auto bg-[#F9FBFD] px-4 print:overflow-visible print:bg-white print:p-0">
       <div className="mx-auto flex w-[816px] min-w-max justify-center py-4 print:w-full print:min-w-full print:py-0">
         <EditorContent editor={editor} />
       </div>
+
+      {/* 变量菜单 */}
+      {menuVisible && (
+        <div
+          style={{
+            position: 'absolute',
+            top: menuPosition.top,
+            left: menuPosition.left,
+            background: 'white',
+            border: '1px solid #ddd',
+            borderRadius: '4px',
+            boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+          }}
+          className="z-10"
+        >
+          {Object.keys(Document_Variables).map((key) => (
+            <div
+              key={key}
+              onClick={() => handleInsertVariable(key)}
+              className="cursor-pointer p-2 hover:bg-gray-100"
+            >
+              {key}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

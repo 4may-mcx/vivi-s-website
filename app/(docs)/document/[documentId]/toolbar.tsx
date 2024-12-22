@@ -6,6 +6,7 @@ import { useEditorStore } from '@/src/store/use-editor-store';
 import {
   BoldIcon,
   CodeIcon,
+  FileIcon,
   ItalicIcon,
   ListTodoIcon,
   LucideIcon,
@@ -22,6 +23,8 @@ import { FontFamilyButton } from './font-family-button';
 import { HeadingLevelButton } from './heading-level-button';
 import { HighlightColorButton } from './highlight-color-button';
 import { TextColorButton } from './text-color-button';
+import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
 
 interface ToolbarButtonProps {
   onClick?: () => void;
@@ -49,6 +52,12 @@ const ToolbarButton = ({
 
 export const Toolbar = () => {
   const { editor } = useEditorStore();
+  const router = useRouter();
+
+  const handlePreview = () => {
+    const currentUrl = new URL(window.location.href);
+    router.push(`${currentUrl}/preview`);
+  };
 
   const sections: {
     label: string;
@@ -82,6 +91,11 @@ export const Toolbar = () => {
             current === 'false' ? 'true' : 'false',
           );
         },
+      },
+      {
+        label: 'Preview',
+        icon: FileIcon,
+        onClick: handlePreview,
       },
     ],
     [
@@ -155,6 +169,7 @@ export const Toolbar = () => {
       {sections[2].map((item) => (
         <ToolbarButton key={item.label} {...item} />
       ))}
+      <Separator orientation="vertical" className="mx-1 h-5 bg-neutral-300" />
     </div>
   );
 };
